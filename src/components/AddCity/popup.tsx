@@ -27,7 +27,6 @@ const AlertDialog = () => {
   const dispatch = useDispatch()
 
   return (
-    <div>
       <Dialog
         TransitionComponent={Transition}
         keepMounted
@@ -50,7 +49,6 @@ const AlertDialog = () => {
           <Button onClick={() => dispatch(closePopup()) }>Close</Button>
         </DialogActions>
       </Dialog>
-    </div>
   );
 }
 export default AlertDialog;

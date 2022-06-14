@@ -19,7 +19,7 @@ export const fetchData = createAsyncThunk(
     }
 );
 
-interface DataState {
+export interface DataState {
     data: [];
     loading: boolean;
 }

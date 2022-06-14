@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-interface IBoxProps {
-    readonly isActive: boolean;
+interface IBoxTypes {
+     isActive: boolean;
 }
 
 const Footer = styled.div`
@@ -16,7 +16,7 @@ const FooterContent = styled.div`
 display: flex;
 align-items: flex-end;
 `
-const Box = styled.a<IBoxProps>`
+const Box = styled.div<IBoxTypes>`
 width: 150px;
 height: 100px;
 border: 1px  solid #ccc;

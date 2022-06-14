@@ -10,7 +10,7 @@ justify-content: center;
 margin: 15px;
 `
 
-const Input = styled.div`
+const TextFieldWrapper = styled.div`
 margin: 8px;
 `
 
@@ -30,7 +30,7 @@ flex-wrap: wrap;
 text-transform: uppercase;
 `
 
-const Delete = styled.div`
+const DeleteButtonWrapper = styled.div`
 background-color: red;
 border-radius: 50%;
 color: white;
@@ -40,8 +40,8 @@ margin: 15px;
 export const Styled = {
 CityPage,
 AddCityName,
-Input,
+TextFieldWrapper,
 InputValue,
 CityBox,
-Delete
+DeleteButtonWrapper
 }

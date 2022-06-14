@@ -3,12 +3,22 @@ import { FC } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { getFormattedTemp } from "../../helpers";
+import { DataState } from "../../redux/main/dataSlice";
 import { Styled } from "./style";
 import { IProps } from "./type";
 
-const Footer: FC<IProps> = ({ city, coords }: IProps) => {
-    const unit = useSelector((state: any) => state.unit.unit);
-    const data = useSelector((state: any) => state.data.data);
+interface IA {
+    dt_txt: string,
+    main: {
+        temp: number,
+    },
+    weather: string[]
+}
+
+const Footer: FC<IProps> = ({ city }: IProps) => {
+    const unit = useSelector((state: string) => state.unit.unit);
+    const data = useSelector((state: DataState) => state.data.data);
+    
     const navigate = useNavigate();
     const location = useParams();
 
@@ -21,12 +31,12 @@ const Footer: FC<IProps> = ({ city, coords }: IProps) => {
         }
     };
     const today = new Date().getDate();
-    
+
     return (
         <Styled.Footer>
             <Styled.FooterContent>
-                {data?.list?.filter((item: any, index: number) => index % 8 === 0).
-                    map((item: any) => {
+                {data?.list?.filter((_item, index: number) => index % 8 === 0).
+                    map((item: IA) => {
                         return <Styled.Box key={Math.random()}
                         onClick={goToCityPage(new Date(item?.dt_txt).getDate())}
                         isActive={!location?.day ? today === new Date(item?.dt_txt).getDate() : +(location?.day || 0) === new Date(item?.dt_txt).getDate()}
