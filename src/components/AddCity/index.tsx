@@ -1,15 +1,15 @@
-import { Button, IconButton, TextField } from "@mui/material";
-import { ChangeEvent, FC, useState } from "react";
-import { Styled } from "./style";
 import ClearIcon from '@material-ui/icons/Clear';
+import { Button, IconButton, TextField } from "@mui/material";
 import cities from 'cities.json';
-import { NavLink, useNavigate } from "react-router-dom";
-import AlertDialog from "./popup";
-import { ICity } from "../../interfaces/types";
+import { ChangeEvent, FC, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCity, removeCity } from "../../redux/main/nameSlice";
+import { NavLink, useNavigate } from "react-router-dom";
+import { ICity } from "../../interfaces/types";
 import { addMessage, changeMessage } from "../../redux/main/messageSlice";
+import { addCity, removeCity } from "../../redux/main/nameSlice";
 import { openPopupWindow } from "../../redux/main/popupSlice";
+import AlertDialog from "./popup";
+import { Styled } from "./style";
 
 const AddCity: FC = () => {
     const [inputValue, setInputValue] = useState('');
@@ -65,7 +65,7 @@ const AddCity: FC = () => {
             <Styled.InputValue>
                 {names.map((name, index) =>
                     <Styled.CityBox>
-                        <NavLink to={`/weather/${name}`}
+                        <NavLink to={`/weather?city=${name}`}
                             key={Math.random()}
                         >
                             {name}

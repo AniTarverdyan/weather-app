@@ -1,6 +1,8 @@
 export const getFormattedTemp = (unit: string, temp: any) => {
     let formattedTemp;
-    if (unit === 'F') {
+    if (!temp) {
+        formattedTemp = '';
+    } else if (unit === 'F') {
         formattedTemp = Math.round(temp * 1.8 + 32) + '°F';
     } else {
         formattedTemp = Math.round(temp) + '°C';

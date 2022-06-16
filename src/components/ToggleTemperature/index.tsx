@@ -1,23 +1,18 @@
 import { ToggleButton } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { upDateC, upDateF } from "../../redux/main/unitSlice";
+import { useContext } from "react";
+import { UnitContext } from "../../context/UnitContext";
 import { Styled } from "./style";
 
 const ToggleTemperature = () => {
-    const dispatch = useDispatch();
-    const value = useSelector((state: any) => state.unit.unit);
-
-    const onCClick = () => {
-        dispatch(upDateC())
+    const {unit, setUnit} = useContext(UnitContext);
+    const setTemperatureUnit = (unit: string) => () => {
+        setUnit(unit);
     }
-
-    const onFClick = () => {
-        dispatch(upDateF())
-    }
+    
     return <Styled.SwitchButton>
     <ToggleButton value='C' size="small" >
-        <input name="toggle" type="radio" onChange={onCClick} checked={value === 'C'} />°C
-        <input name="toggle" type="radio" onChange={onFClick} checked={value === 'F'} />°F
+        <input name="toggle" type="radio" onChange={setTemperatureUnit('C')} checked={unit === 'C'} />°C
+        <input name="toggle" type="radio" onChange={setTemperatureUnit('F')} checked={unit === 'F'} />°F
     </ToggleButton>
     </Styled.SwitchButton>
 }

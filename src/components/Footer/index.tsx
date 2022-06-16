@@ -1,33 +1,25 @@
 /// <reference types="styled-components/cssprop" />
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { UnitContext } from "../../context/UnitContext";
 import { getFormattedTemp } from "../../helpers";
-import { DataState } from "../../redux/main/dataSlice";
+import { RootState } from "../../redux/store";
 import { Styled } from "./style";
 import { IProps } from "./type";
 
-interface IA {
-    dt_txt: string,
-    main: {
-        temp: number,
-    },
-    weather: string[]
-}
-
-const Footer: FC<IProps> = ({ city }: IProps) => {
-    const unit = useSelector((state: string) => state.unit.unit);
-    const data = useSelector((state: DataState) => state.data.data);
+const Footer: FC<IProps> = ({ city, day }: IProps) => {
+    const {unit} = useContext(UnitContext);
+    const data = useSelector((state: RootState) => state.data.data);
     
     const navigate = useNavigate();
-    const location = useParams();
 
     const goToCityPage = (day: number) => () => {
         if (city) {
-            navigate(`/weather/${city}/${day}`)
+            navigate(`/weather?city=${city}&day=${day}`)
         }
         else {
-            navigate(`/weather/${data.city.name}/${day}`)
+            navigate(`/weather?city=${data.city?.name}&day=${day}`)
         }
     };
     const today = new Date().getDate();
@@ -36,10 +28,10 @@ const Footer: FC<IProps> = ({ city }: IProps) => {
         <Styled.Footer>
             <Styled.FooterContent>
                 {data?.list?.filter((_item, index: number) => index % 8 === 0).
-                    map((item: IA) => {
+                    map((item) => {
                         return <Styled.Box key={Math.random()}
                         onClick={goToCityPage(new Date(item?.dt_txt).getDate())}
-                        isActive={!location?.day ? today === new Date(item?.dt_txt).getDate() : +(location?.day || 0) === new Date(item?.dt_txt).getDate()}
+                        isActive={!day ? today === new Date(item?.dt_txt).getDate() : +(day || 0) === new Date(item?.dt_txt).getDate()}
                         >
                             <Styled.Date>
                                 {(new Date(item?.dt_txt).getMonth()) + 1 + '-' + new Date(item?.dt_txt).getDate()}

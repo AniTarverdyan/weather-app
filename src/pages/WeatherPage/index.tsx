@@ -1,19 +1,22 @@
-import { FC, useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
+import { FC, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import Footer from "../../components/Footer";
+import { UnitContext } from "../../context/UnitContext";
 import { getFormattedDate, getFormattedTemp } from "../../helpers";
+import { fetchData } from "../../redux/main/dataSlice";
 import { Styled } from "./style";
 import { ICoords } from "./types";
-import { fetchData, IFetchData } from "../../redux/main/dataSlice";
-import { CircularProgress } from "@mui/material";
 
 const Weather: FC = () => {
     const [coords, setCoords] = useState<ICoords>();
-    const { city, day } = useParams();
+    const [searchParams] = useSearchParams();
+    const city = searchParams.get("city");
+    const day = searchParams.get("day");
     
     const dispatch = useDispatch();
-    const unit = useSelector((state: any) => state.unit.unit);
+    const {unit} = useContext(UnitContext);
     const data = useSelector((state: any) => state.data.data);
     const loading = useSelector((state: any) => state.data.loading);
 
@@ -29,7 +32,7 @@ const Weather: FC = () => {
     }, [city]);
 
     useEffect(() => {
-        dispatch(fetchData({ city, coords } as IFetchData) as any);
+        dispatch(fetchData({ city, coords }) as any);
     }, [city, coords]);
 
     const today = new Date().getDate();
@@ -70,7 +73,7 @@ const Weather: FC = () => {
                 }
             </Styled.DailyContent>
         </Styled.Main>
-        <Footer city={city} coords={coords} />
+        <Footer city={city} day={day} coords={coords} />
     </>;
 };
 

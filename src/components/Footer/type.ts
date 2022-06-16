@@ -1,3 +1,7 @@
+import { ICoords } from "../../pages/WeatherPage/types";
+
 export interface IProps {
-    city: string,
+    city: string | null,
+    day: string | null,
+    coords?: ICoords
 }
