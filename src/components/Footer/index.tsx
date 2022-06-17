@@ -1,4 +1,5 @@
 /// <reference types="styled-components/cssprop" />
+import { LocationCity } from "@material-ui/icons";
 import { FC, useContext } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -9,19 +10,9 @@ import Styled from "./style";
 import { IProps } from "./type";
 
 const Footer: FC<IProps> = ({ city, day }: IProps) => {
-    const {unit} = useContext(UnitContext);
+    const { unit } = useContext(UnitContext);
     const data = useSelector((state: RootState) => state.data.data);
-    
-    const navigate = useNavigate();
 
-    const goToCityPage = (day: number) => () => {
-        if (city) {
-            navigate(`/weather?city=${city}&day=${day}`)
-        }
-        else {
-            navigate(`/weather?city=${data.city?.name}&day=${day}`)
-        }
-    };
     const today = new Date().getDate();
 
     return (
@@ -30,10 +21,9 @@ const Footer: FC<IProps> = ({ city, day }: IProps) => {
                 {data?.list?.filter((_item, index: number) => index % 8 === 0).
                     map((item) => {
                         return <Styled.Box key={Math.random()}
-                        onClick={goToCityPage(new Date(item?.dt_txt).getDate())}
-                        isActive={!day ? today === new Date(item?.dt_txt).getDate() : +(day || 0) === new Date(item?.dt_txt).getDate()}
+                            isActive={!day ? today === new Date(item?.dt_txt).getDate() : +(day || 0) === new Date(item?.dt_txt).getDate()}
                         >
-                            <NavLink to={`/weather/${city ? data.city.name : city}/${new Date(item?.dt_txt).getDate()}`}>
+                            <NavLink to={`/weather?city=${city ? data.city?.name : LocationCity}&day=${new Date(item?.dt_txt).getDate()}`}>
                                 <Styled.Date>
                                     {(new Date(item?.dt_txt).getMonth()) + 1 + '-' + new Date(item?.dt_txt).getDate()}
                                 </Styled.Date>
@@ -44,7 +34,6 @@ const Footer: FC<IProps> = ({ city, day }: IProps) => {
                                             src={`http://openweathermap.org/img/wn/${item?.weather?.[0]?.icon}@2x.png`} />}
                                 </Styled.TempIcon>
                             </NavLink>
-
                         </Styled.Box>
                     })}
             </Styled.FooterContent>

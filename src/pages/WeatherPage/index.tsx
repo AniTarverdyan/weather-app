@@ -8,16 +8,15 @@ import { getFormattedDate, getFormattedTemp } from "../../helpers";
 import Styled from "./style";
 import { ICoords } from "./types";
 import { fetchData } from "../../redux/main/dataSlice";
-import { IFetchData } from "../../interfaces/types";
 
 const Weather: FC = () => {
     const [coords, setCoords] = useState<ICoords>();
     const [searchParams] = useSearchParams();
     const city = searchParams.get("city");
     const day = searchParams.get("day");
-    
+
     const dispatch = useDispatch();
-    const {unit} = useContext(UnitContext);
+    const { unit } = useContext(UnitContext);
     const data = useSelector((state: any) => state.data.data);
     const loading = useSelector((state: any) => state.data.loading);
 
@@ -40,7 +39,8 @@ const Weather: FC = () => {
 
     const firstData = data?.list?.[0];
     const dailyTemp = data?.list?.find((item: any) => new Date(item?.dt_txt).getDate() === +(day || 0))
-    return loading ? <Styled.Loader style={{textAlign: 'center', margin: 100}}><CircularProgress /></Styled.Loader> : <>
+
+    return loading ? <Styled.Loader style={{ textAlign: 'center', margin: 100 }}><CircularProgress /></Styled.Loader> : <>
         <Styled.Main id={data?.city?.id}>
             <Styled.MainContent>
                 <Styled.CityTemp>
@@ -59,7 +59,7 @@ const Weather: FC = () => {
                     return !day ? (new Date(item?.dt_txt).getDate() === today) : (+day === new Date(item?.dt_txt).getDate())
                 })
                     .map((item: any) => {
-                
+
                         const temp = getFormattedTemp(unit, item.main.temp)
                         const date = getFormattedDate(item?.dt_txt)
                         return <Styled.DailyTemp key={Math.random()} >
