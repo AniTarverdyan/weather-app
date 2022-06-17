@@ -1,7 +1,9 @@
-import { FC } from "react";
+
+import React, { FC } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { UnitContext } from "../../App";
 import ToggleTemperature from "../ToggleTemperature";
-import { Styled } from "./style";
+import Styled from "./style";
 
 const Header: FC = () => {
     const currentPage = useLocation()
@@ -9,13 +11,14 @@ const Header: FC = () => {
     const shouldRenderToggleTemperature =  currentPage.pathname !== '/cities' 
 
     return (
-        <Styled.HeaderContent>
+   <Styled.HeaderContent>
             <Styled.NavBar>
                 <NavLink to='/'><Styled.NavItem isActive={currentPage.pathname === '/weather' }>Home</Styled.NavItem></NavLink> 
                 <NavLink to='/cities'><Styled.NavItem isActive={currentPage.pathname === '/cities' }>Favorite Cities</Styled.NavItem></NavLink>
             </Styled.NavBar>
             {shouldRenderToggleTemperature && <ToggleTemperature />}
         </Styled.HeaderContent>
+     
     )
 };
 export default Header;

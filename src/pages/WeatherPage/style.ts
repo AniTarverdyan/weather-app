@@ -62,7 +62,7 @@ height: 50px;
 padding: 5px;
 }
 `
-export const Styled = {
+export default {
     Loader,
     MainContent,
     Main,

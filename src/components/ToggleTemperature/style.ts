@@ -8,6 +8,6 @@ border-radius: 50px;
 text-decoration: none;
 margin: 25px;
 `
-export  const Styled = {
+export default {
     SwitchButton,
 }

@@ -37,7 +37,7 @@ color: white;
 margin: 15px;
 `
 
-export const Styled = {
+export default {
 CityPage,
 AddCityName,
 TextFieldWrapper,

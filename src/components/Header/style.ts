@@ -28,7 +28,7 @@ color: #ccc;
 padding: 0 10px;
 transition: color .2s linear;
 `
-export const Styled = {
+export default {
     HeaderContent,
     NavItem,
     NavBar

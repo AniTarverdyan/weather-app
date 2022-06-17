@@ -1,11 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { WeatherApi } from '../../api';
+import { IFetchData } from '../../interfaces/types';
 import { ICoords } from '../../pages/WeatherPage/types';
 
-export interface IFetchData {
-    city: string;
-    coords: ICoords;
-}
+
 
 export const fetchData = createAsyncThunk(
     'data/fetch',

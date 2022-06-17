@@ -1,7 +1,7 @@
 import { ToggleButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { upDateC, upDateF } from "../../redux/main/unitSlice";
-import { Styled } from "./style";
+import Styled from "./style";
 
 const ToggleTemperature = () => {
     const dispatch = useDispatch();

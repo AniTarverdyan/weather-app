@@ -5,7 +5,8 @@ export interface ButtonProps {
   onClick: () => void;
 };
 
-export interface IProps {
+export interface IDialogProps {
+  message: string;
   open: boolean;
-  setOpen: (open: boolean) => void;
-};
+  setOpen: any
+}

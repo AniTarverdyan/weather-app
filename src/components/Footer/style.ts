@@ -40,7 +40,7 @@ font-weight: bolder;
 const WeatherIcon = styled.img`
 height: 50px;
 `
-export const Styled = {
+export default {
     Footer,
     FooterContent,
     Box,

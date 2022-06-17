@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { getFormattedDate, getFormattedTemp } from "../../helpers";
-import { Styled } from "./style";
+import Styled from "./style";
 import { ICoords } from "./types";
-import { fetchData, IFetchData } from "../../redux/main/dataSlice";
+import { fetchData } from "../../redux/main/dataSlice";
 import { CircularProgress } from "@mui/material";
+import { IFetchData } from "../../interfaces/types";
 
 const Weather: FC = () => {
     const [coords, setCoords] = useState<ICoords>();

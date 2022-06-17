@@ -1,20 +1,19 @@
 import { Button, IconButton, TextField } from "@mui/material";
 import { ChangeEvent, FC, useState } from "react";
-import { Styled } from "./style";
+import  Styled  from "./style";
 import ClearIcon from '@material-ui/icons/Clear';
 import cities from 'cities.json';
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AlertDialog from "./popup";
 import { ICity } from "../../interfaces/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addCity, removeCity } from "../../redux/main/nameSlice";
-import { addMessage, changeMessage } from "../../redux/main/messageSlice";
-import { openPopupWindow } from "../../redux/main/popupSlice";
 
 const AddCity: FC = () => {
     const [inputValue, setInputValue] = useState('');
+    const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false)
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const names: string[] = useSelector((state: any) => (state.name.names).map((item: string) => item));
 
@@ -22,17 +21,18 @@ const AddCity: FC = () => {
     const onChangeInputValue = (event: ChangeEvent<HTMLInputElement>): void => {
         setInputValue(event.target.value)
     };
-    const addNewCiy = (event: any): void => {
+
+    const addNewCiy = (): void => {
         if (names.includes(inputValue)) {
-            dispatch(openPopupWindow());
-            dispatch(addMessage())
+            setOpen(true);
+            setMessage('City is already added')
             setInputValue('');
         } else if (enteredCity) {
             dispatch(addCity(inputValue));
             setInputValue('');
         } else {
-            dispatch(openPopupWindow());
-            dispatch(changeMessage())
+            setOpen(true);
+            setMessage('City is not defined')
         };
     };
 
@@ -40,7 +40,6 @@ const AddCity: FC = () => {
         event.stopPropagation();
         dispatch(removeCity(index));
     };
-
 
     return (
         <Styled.CityPage>
@@ -82,7 +81,7 @@ const AddCity: FC = () => {
                     </Styled.CityBox>
                 )}
             </Styled.InputValue>
-            <AlertDialog />
+            <AlertDialog message={message} open={open} setOpen={setOpen}/>
         </Styled.CityPage>
     )
 };

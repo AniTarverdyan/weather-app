@@ -7,8 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TransitionProps } from '@mui/material/transitions';
 import { Slide } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
-import { closePopup } from '../../redux/main/popupSlice';
+import { IDialogProps } from './types';
 
 
 const Transition = React.forwardRef(function Transition(
@@ -20,20 +19,15 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const AlertDialog = () => {
-
-  const messages: string = useSelector((state: any) => state.message.message)
-  const openPopup = useSelector((state: any) => state.openPopup.openPopup)
-  const dispatch = useDispatch()
-
+const AlertDialog = ({message, open, setOpen}) => {
   return (
       <Dialog
         TransitionComponent={Transition}
         keepMounted
         fullWidth
         maxWidth='xs'
-        open={openPopup}
-        onClose={() => dispatch(closePopup())}
+        open={open}
+        onClose={() => setOpen(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -42,11 +36,11 @@ const AlertDialog = () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText >
-            {messages}
+            {message}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => dispatch(closePopup()) }>Close</Button>
+          <Button onClick={() => setOpen(false) }>Close</Button>
         </DialogActions>
       </Dialog>
   );
