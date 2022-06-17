@@ -5,9 +5,10 @@ import ClearIcon from '@material-ui/icons/Clear';
 import cities from 'cities.json';
 import { NavLink } from "react-router-dom";
 import AlertDialog from "./popup";
-import { ICity } from "../../interfaces/types";
 import { useDispatch, useSelector } from "react-redux";
 import { addCity, removeCity } from "../../redux/main/nameSlice";
+import { ICity } from "../../interfaces/types";
+
 
 const AddCity: FC = () => {
     const [inputValue, setInputValue] = useState('');
@@ -64,7 +65,7 @@ const AddCity: FC = () => {
             <Styled.InputValue>
                 {names.map((name, index) =>
                     <Styled.CityBox>
-                        <NavLink to={`/weather/${name}`}
+                        <NavLink to={`/weather?city=${name}`}
                             key={Math.random()}
                         >
                             {name}

@@ -1,13 +1,27 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { WeatherApi } from '../../api';
-import { IFetchData } from '../../interfaces/types';
 import { ICoords } from '../../pages/WeatherPage/types';
 
-
+export interface IFetchData {
+    city?: {
+        name: string;
+    };
+    coords?: ICoords;
+    list?: {
+        dt_txt: string;
+        main: {
+            temp: number;
+        };
+        weather: {
+            description: string;
+            icon: String;
+        }[];
+    }[];
+}
 
 export const fetchData = createAsyncThunk(
     'data/fetch',
-    async ({ city, coords }: IFetchData) => {
+    async ({ city, coords }: {city: string | null; coords?: ICoords}) => {
         if (city) {
             return WeatherApi.getWeatherByCity(city)
         }
@@ -18,12 +32,12 @@ export const fetchData = createAsyncThunk(
 );
 
 export interface DataState {
-    data: [];
+    data: IFetchData;
     loading: boolean;
 }
 
 const initialState: DataState = {
-    data: [],
+    data: {},
     loading: false,
 };
 
