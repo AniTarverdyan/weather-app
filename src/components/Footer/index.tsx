@@ -2,7 +2,7 @@
 import { LocationCity } from "@material-ui/icons";
 import { FC, useContext } from "react";
 import { useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { UnitContext } from "../../context/UnitContext";
 import { getFormattedTemp } from "../../helpers";
 import { RootState } from "../../redux/store";

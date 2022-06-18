@@ -21,12 +21,12 @@ export interface IFetchData {
 
 export const fetchData = createAsyncThunk(
     'data/fetch',
-    async ({ city, coords }: {city: string | null; coords?: ICoords}) => {
+    async ({ city, coords }: { city: string | null; coords?: ICoords }) => {
         if (city) {
             return WeatherApi.getWeatherByCity(city)
         }
         else if (coords) {
-            return WeatherApi.getWeatherByCoords(coords)           
+            return WeatherApi.getWeatherByCoords(coords)
         }
     }
 );

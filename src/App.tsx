@@ -3,7 +3,7 @@ import Header from './components/Header';
 import { UnitProvider } from './context/UnitContext';
 import Routing from './Routing';
 
-export const UnitContext = React.createContext();
+export const UnitContext = React.createContext(undefined);
 
 const App: FC = () => {
     return (

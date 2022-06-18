@@ -5,9 +5,9 @@ import { useSearchParams } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { UnitContext } from "../../context/UnitContext";
 import { getFormattedDate, getFormattedTemp } from "../../helpers";
+import { fetchData } from "../../redux/main/dataSlice";
 import Styled from "./style";
 import { ICoords } from "./types";
-import { fetchData } from "../../redux/main/dataSlice";
 
 const Weather: FC = () => {
     const [coords, setCoords] = useState<ICoords>();

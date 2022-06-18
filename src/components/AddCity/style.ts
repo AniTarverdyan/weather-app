@@ -38,10 +38,10 @@ margin: 15px;
 `
 
 export default {
-CityPage,
-AddCityName,
-TextFieldWrapper,
-InputValue,
-CityBox,
-DeleteButtonWrapper
+    CityPage,
+    AddCityName,
+    TextFieldWrapper,
+    InputValue,
+    CityBox,
+    DeleteButtonWrapper
 }

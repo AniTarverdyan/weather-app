@@ -8,9 +8,9 @@ export interface ICity {
 export interface ILoader {
     loading: boolean,
     setLoading: any
-    }
+}
 
-    export interface IUnit {
-        unit?: string,
-        setUnit?: any;
-    }
+export interface IUnit {
+    unit?: string,
+    setUnit?: any;
+}

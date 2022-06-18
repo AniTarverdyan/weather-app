@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 interface IBoxTypes {
-     isActive: boolean;
+    isActive: boolean;
 }
 
 const Footer = styled.div`

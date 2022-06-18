@@ -1,3 +1,5 @@
+import { ICoords } from "../../pages/WeatherPage/types";
+
 export interface IFooter {
     city: string,
 };
@@ -9,7 +11,6 @@ export interface IItemContent {
     },
     weather: string[]
 }
-import { ICoords } from "../../pages/WeatherPage/types";
 
 export interface IProps {
     city: string | null,
